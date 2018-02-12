@@ -4,11 +4,13 @@ import { HighchartsConfig, HighchartsModule } from 'ngx-highcharts-lazy'
 
 import { AppComponent } from './app.component'
 import { LineChartComponent } from './charts/line-chart.component'
+import { AreaChartComponent } from './charts/area-chart.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    LineChartComponent
+    LineChartComponent,
+    AreaChartComponent,
   ],
   imports: [
     BrowserModule,
