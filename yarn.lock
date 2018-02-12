@@ -188,6 +188,16 @@
   dependencies:
     typescript "~2.6.2"
 
+"@types/geojson@*":
+  version "7946.0.1"
+  resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.1.tgz#1fc41280e42f08f0d568401a556bc97c34f5262e"
+
+"@types/highcharts@^5.0.15":
+  version "5.0.16"
+  resolved "https://registry.yarnpkg.com/@types/highcharts/-/highcharts-5.0.16.tgz#c85281ac496961d72c867d0b1667d43a088e7f51"
+  dependencies:
+    "@types/geojson" "*"
+
 "@types/jest@^22.0.1":
   version "22.1.2"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-22.1.2.tgz#813a79ec98221633845627636dbc606f31220dbc"
@@ -2790,6 +2800,10 @@ hawk@~6.0.2:
 he@1.1.x:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
+
+highcharts@^6.0.6:
+  version "6.0.6"
+  resolved "https://registry.yarnpkg.com/highcharts/-/highcharts-6.0.6.tgz#c896ece8cdbab18b4f8b7b33ab9647aa7150c510"
 
 hmac-drbg@^1.0.0:
   version "1.0.1"
