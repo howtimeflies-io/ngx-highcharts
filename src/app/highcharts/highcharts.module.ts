@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core'
-import { HighchartComponent, HighchartsService } from './index'
+import { HighchartComponent } from './highchart.component'
+import { HighchartsService } from './highcharts.service'
 
 @NgModule({
   declarations: [HighchartComponent],

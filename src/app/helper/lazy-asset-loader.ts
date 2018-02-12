@@ -15,8 +15,8 @@ export class LazyAssetLoader {
    *
    * Load a javascript asset to the application lazily by appending a <script> tag to <body> of index.html
    *
-   * @param {string} src the url of the script
-   * @returns {Observable<boolean>} true if the script is new loaded, otherwise false.
+   * @param src the url of the script
+   * @returns true if the script is new loaded, otherwise false.
    *   An ErrorObservable would be returned if the asset is failed to load.
    */
   public static loadScript(src: string): Observable<boolean> {
@@ -30,8 +30,8 @@ export class LazyAssetLoader {
    *
    * Load a css asset to the application lazily by appending a <link> tag to <body> of index.html
    *
-   * @param {string} href the url of the script
-   * @returns {Observable<boolean>} true if the script is new loaded, otherwise false.
+   * @param href the url of the script
+   * @returns true if the script is new loaded, otherwise false.
    *   An ErrorObservable would be returned if the asset is failed to load.
    */
   public static loadCss(href: string): Observable<boolean> {
@@ -44,9 +44,9 @@ export class LazyAssetLoader {
   /**
    * Load an asset (javascript, css, ...) to the application lazily by appending tags to <body> of index.html
    *
-   * @param {string} tagName the tag name to append
-   * @param {{}} props the properties of the tag
-   * @returns {Observable<boolean>} true if the asset is new loaded, otherwise false.
+   * @param tagName the tag name to append
+   * @param props the properties of the tag
+   * @returns true if the asset is new loaded, otherwise false.
    *   An ErrorObservable would be returned if the asset is failed to load.
    */
   private static load(tagName: string, props: {}): Observable<boolean> {
@@ -66,7 +66,7 @@ export class LazyAssetLoader {
     const asset = {
       id,
       loaded: false,
-      observable: null
+      observable: null as Observable<boolean>
     }
     const promise = new Promise<boolean>((resolve, reject) => {
       tag.onload = () => {
