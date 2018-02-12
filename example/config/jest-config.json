@@ -1,0 +1,25 @@
+{
+  "preset": "jest-preset-angular",
+  "rootDir": "../",
+  "globals": {
+    "ts-jest": {
+      "tsConfigFile": "config/tsconfig.spec.json"
+    },
+    "__TRANSFORM_HTML__": true
+  },
+  "setupTestFrameworkScriptFile": "<rootDir>/config/jest.ts",
+  "collectCoverage": true,
+  "collectCoverageFrom": [
+    "src/app/**/*.ts",
+    "!**/node_modules/**",
+    "!**/*.{module,routes,d,spec}.ts"
+  ],
+  "coverageReporters": [
+    "json",
+    "lcov",
+    "text-summary",
+    "html"
+  ],
+  "mapCoverage": true,
+  "coverageDirectory": "<rootDir>/coverage"
+}
