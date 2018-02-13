@@ -8,6 +8,8 @@ import { AreaChartComponent } from './charts/area-chart.component'
 import { ColumnRangeChartComponent } from './charts/column-range-chart.component'
 import { DrilldownChartComponent } from './charts/drilldown-chart.component'
 import { WordcloudChartComponent } from './charts/wordcloud-chart.component'
+import { RouterModule } from '@angular/router'
+import { ROUTES } from './app.routes'
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { WordcloudChartComponent } from './charts/wordcloud-chart.component'
   imports: [
     BrowserModule,
     HighchartsModule,
+    RouterModule.forRoot(ROUTES, { useHash: Boolean(history.pushState) === false }),
   ],
   providers: [
     { provide: HighchartsConfig, useValue: {} }
