@@ -7,6 +7,7 @@ import { LineChartComponent } from './charts/line-chart.component'
 import { AreaChartComponent } from './charts/area-chart.component'
 import { ColumnRangeChartComponent } from './charts/column-range-chart.component'
 import { DrilldownChartComponent } from './charts/drilldown-chart.component'
+import { WordcloudChartComponent } from './charts/wordcloud-chart.component'
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { DrilldownChartComponent } from './charts/drilldown-chart.component'
     AreaChartComponent,
     ColumnRangeChartComponent,
     DrilldownChartComponent,
+    WordcloudChartComponent,
   ],
   imports: [
     BrowserModule,
