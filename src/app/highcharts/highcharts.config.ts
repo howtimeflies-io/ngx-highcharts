@@ -1,6 +1,6 @@
 export class HighchartsConfig {
   public static defaultConfig: HighchartsConfig = {
-    cdnBaseUrl: 'https://unpkg.com/highcharts@6.0.6',
+    cdnBaseUrl: 'https://unpkg.com/highcharts',
     scriptName: 'highcharts.js',
     delayToExecuteModulesCode: 500,
     maxDelayToResizeContainer: 10000,

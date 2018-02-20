@@ -8,23 +8,22 @@
     "lint": "tslint \"src/**/*.ts\" --project tsconfig.json",
     "packagr": "ng-packagr -p package.json"
   },
-  "private": true,
   "dependencies": {
-    "@angular/core": "^5.2.0",
-    "rxjs": "^5.5.6",
-    "zone.js": "^0.8.19"
+    "@angular/core": "latest",
+    "rxjs": "latest",
+    "zone.js": "latest"
   },
   "devDependencies": {
-    "@angular/common": "^5.2.0",
-    "@angular/compiler": "^5.2.0",
-    "@angular/compiler-cli": "^5.2.0",
-    "@angular/platform-browser": "^5.2.0",
-    "@angular/platform-browser-dynamic": "^5.2.0",
-    "@types/highcharts": "^5.0.15",
+    "@angular/common": "latest",
+    "@angular/compiler": "latest",
+    "@angular/compiler-cli": "latest",
+    "@angular/platform-browser": "latest",
+    "@angular/platform-browser-dynamic": "latest",
+    "@types/highcharts": "latest",
     "@types/jest": "^22.0.1",
     "@types/node": "~6.0.60",
     "codelyzer": "^4.0.1",
-    "highcharts": "^6.0.6",
+    "highcharts": "latest",
     "jest": "^22.1.4",
     "jest-preset-angular": "^5.0.0",
     "ng-packagr": "^2.0.0",
