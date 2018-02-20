@@ -74,7 +74,7 @@ export class HighchartComponent implements AfterViewInit, OnDestroy {
     this.subscription = waitUntilObjectAvailable(getSize, maxDelay).subscribe(size => {
       this.subscription = null
       this.resizeChart(size)
-    })
+    }, () => null)
   }
 
   private resizeChart(size: Size) {
