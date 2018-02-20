@@ -64,9 +64,9 @@ export class AreaChartComponent {
     series: []
   }
 
-  chart: Highcharts.ChartObject
+  public chart: Highcharts.ChartObject
 
-  onLoad(evt: {chart: Highcharts.ChartObject, highcharts: Highcharts.Static}) {
+  public onLoad(evt: {chart: Highcharts.ChartObject, highcharts: Highcharts.Static}) {
     this.chart = evt.chart
     this.chart.addSeries({
       name: 'John',

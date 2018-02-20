@@ -44,7 +44,7 @@ export class DrilldownChartComponent implements OnInit {
       series: []
     }
   }
-  private chart: Highcharts.ChartObject
+  public chart: Highcharts.ChartObject
   private data: Array<{name: string, y: number, drilldown?: string}> = []
   private drillDownData: Array<{name: string, data: any[]}> = []
 

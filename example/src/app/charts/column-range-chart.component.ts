@@ -5,11 +5,14 @@ import { Component } from '@angular/core'
   selector: 'app-column-range-chart',
   template: `
     <div class="chart-container">
-      <ngx-highchart [options]="options" [modules]="['highcharts-more']"></ngx-highchart>
+      <ngx-highchart [options]="options" [modules]="['highcharts-more']" (load)="chart = $event.chart"></ngx-highchart>
     </div>
   `
 })
 export class ColumnRangeChartComponent {
+
+  public chart: Highcharts.ChartObject
+
   public options: Highcharts.Options = {
     chart: {
       type: 'columnrange',

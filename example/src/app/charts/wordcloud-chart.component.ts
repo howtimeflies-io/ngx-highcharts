@@ -13,6 +13,8 @@ interface Word {name: string, weight: number}
   `
 })
 export class WordcloudChartComponent {
+  public chart: Highcharts.ChartObject
+
   public options: Highcharts.Options = {
     series: [{
       type: 'wordcloud',
@@ -33,6 +35,7 @@ export class WordcloudChartComponent {
   }
 
   public onLoad(evt: {chart: Highcharts.ChartObject, highcharts: Highcharts.Static}) {
+    this.chart = evt.chart
     evt.chart.series[0].setData(this.getWords())
   }
 

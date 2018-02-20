@@ -5,11 +5,14 @@ import { Component } from '@angular/core'
   selector: 'app-line-chart',
   template: `
     <div class="chart-container">
-      <ngx-highchart [options]="options"></ngx-highchart>
+      <ngx-highchart [options]="options" (load)="chart = $event.chart"></ngx-highchart>
     </div>
   `
 })
 export class LineChartComponent {
+
+  public chart: Highcharts.ChartObject
+
   public options: Highcharts.Options = {
     title: {
       text: 'Solar Employment Growth by Sector, 2010-2016'
