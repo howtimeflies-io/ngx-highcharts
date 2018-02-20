@@ -29,4 +29,14 @@ describe(`Word-Cloud Chart Component`, () => {
     expect(data).toContainEqual(['et', 2])
     expect(data).toContainEqual(['neque', 1])
   })
+
+  it(`should format the data point tooltip`, () => {
+    const series = comp.options.series[0] as Highcharts.WordCloudChartSeriesOptions
+    const point = {
+      name: 'word',
+      weight: 321,
+      ...series.tooltip
+    }
+    expect(point.pointFormatter()).toEqual('<strong>word</strong>: Occurrence 321')
+  })
 })

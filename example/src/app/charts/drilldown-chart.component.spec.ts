@@ -46,4 +46,10 @@ describe(`Drill-down Chart Component`, () => {
     expect(data.data).toContainEqual(['v6.0', 1.06])
     expect(data.data).toContainEqual(['v7.0', 0.5])
   })
+
+  it(`should not drill down with invalid data`, () => {
+    spyOn(comp.chart, 'addSeriesAsDrilldown')
+    highcharts.fireEvent(comp.chart, 'drilldown', {point: {name: 'invalid'}})
+    expect(comp.chart.addSeriesAsDrilldown).not.toHaveBeenCalled()
+  })
 })

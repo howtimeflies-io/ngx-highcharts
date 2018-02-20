@@ -26,4 +26,14 @@ describe(`Area Chart Component`, () => {
     expect(comp.chart.series[0].data.map(it => it.y)).toEqual([0, 1, 4, 4, 5, 2, 3, 7])
     expect(comp.chart.series[1].data.map(it => it.y)).toEqual([1, 0, 3, null, 3, 1, 2, 1])
   })
+
+  it(`should format the data point tooltip`, () => {
+    const point = {
+      series: {name: 'series-name'},
+      x: 1,
+      y: 123,
+      ...comp.options.tooltip
+    }
+    expect(point.formatter()).toEqual('<b>series-name</b><br/>1: 123')
+  })
 })
