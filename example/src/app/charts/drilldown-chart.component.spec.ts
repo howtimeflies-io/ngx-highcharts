@@ -34,7 +34,7 @@ describe(`Drill-down Chart Component`, () => {
 
   it(`should drill down to a pie`, () => {
     let data = null
-    spyOn(comp.chart, 'addSeriesAsDrilldown').and.callFake((point, drillDownData) => data = drillDownData)
+    spyOn(comp.chart, 'addSeriesAsDrilldown').and.callFake((x, drillDownData) => data = drillDownData)
     const point = comp.chart.series[0].data[0]
     highcharts.fireEvent(comp.chart, 'drilldown', {point})
 

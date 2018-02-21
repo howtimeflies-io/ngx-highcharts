@@ -12,7 +12,7 @@ import { Component } from '@angular/core'
         <li><a href [routerLink]="['drilldown-chart']">Drilldown Chart</a></li>
         <li><a href [routerLink]="['wordcloud-chart']">Wordcloud Chart</a></li>
       </ul>
-    
+
       <router-outlet class="router-outlet"></router-outlet>
     </div>
   `,

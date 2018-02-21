@@ -31,7 +31,7 @@ describe('Helper Methods', () => {
   it(`should re-throw the unexpected exception`, () => {
     const obj: TestClass = {
       get nested() {
-        throw 'unexpected exception'
+        throw new Error('unexpected exception')
       },
       set nested(val: {prop?: string}) {
       }
@@ -40,7 +40,7 @@ describe('Helper Methods', () => {
       safeChainedProperty(() => obj.nested.prop)
       fail('it should catch an exception')
     } catch (e) {
-      expect(e).toEqual('unexpected exception')
+      expect(e.message).toEqual('unexpected exception')
     }
   })
 

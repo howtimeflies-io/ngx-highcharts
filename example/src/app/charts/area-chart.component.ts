@@ -43,14 +43,14 @@ export class AreaChartComponent {
       },
       labels: {
         formatter: function () {
-          return this.value;
+          return this.value
         }
       }
     },
     tooltip: {
       formatter: function () {
         return '<b>' + this.series.name + '</b><br/>' +
-          this.x + ': ' + this.y;
+          this.x + ': ' + this.y
       }
     },
     plotOptions: {
