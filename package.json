@@ -1,6 +1,6 @@
 {
   "name": "@howtimeflies/ngx-highcharts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Highcharts wrapper for Angular (version 2 and newer)",
   "main": "./bundles/howtimefleis-ngx-highcharts.umd.js",
   "module": "./esm5/howtimefleis-ngx-highcharts.js",
@@ -45,7 +45,6 @@
     "type": "git",
     "url": "https://github.com/angular/angular.git"
   },
-
   "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
   "ngPackage": {
     "lib": {
