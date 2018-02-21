@@ -123,12 +123,6 @@
   dependencies:
     tslib "^1.7.1"
 
-"@angular/core@latest":
-  version "5.2.5"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-5.2.5.tgz#24f9cd75c5b2728f2ddd1869777590ea7177bca9"
-  dependencies:
-    tslib "^1.7.1"
-
 "@angular/forms@^5.2.0":
   version "5.2.4"
   resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-5.2.4.tgz#a731087e147ca61f5051cbe22597a24d937c4852"
@@ -174,10 +168,7 @@
 "@howtimeflies/ngx-highcharts@file:../dist":
   version "0.0.0"
   dependencies:
-    "@angular/core" latest
-    rxjs latest
     tslib "^1.7.1"
-    zone.js latest
 
 "@ngtools/json-schema@1.1.0", "@ngtools/json-schema@^1.1.0":
   version "1.1.0"
@@ -5685,7 +5676,7 @@ run-queue@^1.0.0, run-queue@^1.0.3:
   dependencies:
     aproba "^1.1.1"
 
-rxjs@^5.5.6, rxjs@latest:
+rxjs@^5.5.6:
   version "5.5.6"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.6.tgz#e31fb96d6fd2ff1fd84bcea8ae9c02d007179c02"
   dependencies:
@@ -7284,6 +7275,6 @@ yn@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/yn/-/yn-2.0.0.tgz#e5adabc8acf408f6385fc76495684c88e6af689a"
 
-zone.js@^0.8.19, zone.js@latest:
+zone.js@^0.8.19:
   version "0.8.20"
   resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.8.20.tgz#a218c48db09464b19ff6fc8f0d4bb5b1046e185d"
