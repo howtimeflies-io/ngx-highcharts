@@ -11,7 +11,6 @@ import { HighchartsConfig } from './highcharts.config'
 export class HighchartsService {
 
   private observable: Observable<Highcharts.Static> = null
-  private highcharts: Highcharts.Static = null
   private config: HighchartsConfig
 
   constructor(customConfig: HighchartsConfig) {
@@ -26,7 +25,7 @@ export class HighchartsService {
     if (!this.observable) {
       const defaultUrl = `${this.config.cdnBaseUrl}/${this.config.scriptName}`
       this.observable = LazyAssetLoader.loadScript(url || defaultUrl).pipe(
-        mergeMap(() => waitUntilObjectAvailable(() => window['Highcharts'] as Highcharts.Static, 1000, 20))
+        mergeMap(() => waitUntilObjectAvailable(() => this.highcharts, 1000, 20))
       )
     }
     return this.observable
@@ -43,6 +42,10 @@ export class HighchartsService {
       // Is there any reliable solution to check if the code inside the new added <script> tag is executed?
       mergeMap(arr => arr.some(it => !!it) ? of(highcharts).pipe(delay(millis)) : of(highcharts))
     )
+  }
+
+  private get highcharts(): Highcharts.Static {
+    return window['Highcharts'] as Highcharts.Static
   }
 
   // 'highcharts-more' -> 'https://unpkg.com/highcharts@6.0.4/highcharts-more.js'
