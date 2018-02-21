@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing'
+import {HighchartsTestingModule} from '@howtimeflies/ngx-highcharts'
 
 import {WordcloudChartComponent} from './wordcloud-chart.component'
-import {HighchartsTestingModule} from 'ngx-highcharts-lazy'
 
 describe(`Word-Cloud Chart Component`, () => {
   let comp: WordcloudChartComponent

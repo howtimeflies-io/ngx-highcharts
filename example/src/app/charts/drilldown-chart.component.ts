@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core'
-import * as Highcharts from 'ngx-highcharts-lazy/src/@types/highcharts'
+import * as Highcharts from '@howtimeflies/ngx-highcharts/src/@types/highcharts'
 
 // demo chart copied from https://www.highcharts.com/demo/pie-drilldown
 @Component({

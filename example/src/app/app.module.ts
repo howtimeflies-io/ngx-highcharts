@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
-import { HighchartsConfig, HighchartsModule } from 'ngx-highcharts-lazy'
+import { HighchartsConfig, HighchartsModule } from '@howtimeflies/ngx-highcharts'
 
 import { AppComponent } from './app.component'
 import { LineChartComponent } from './charts/line-chart.component'

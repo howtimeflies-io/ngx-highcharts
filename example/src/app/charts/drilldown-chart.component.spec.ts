@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing'
+import {HighchartsTestingModule} from '@howtimeflies/ngx-highcharts'
 
 import {DrilldownChartComponent} from './drilldown-chart.component'
-import {HighchartsTestingModule} from 'ngx-highcharts-lazy'
 
 describe(`Drill-down Chart Component`, () => {
   let comp: DrilldownChartComponent

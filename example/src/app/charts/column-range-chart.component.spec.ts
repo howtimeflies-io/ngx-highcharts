@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing'
+import {HighchartsTestingModule} from '@howtimeflies/ngx-highcharts'
 
 import {ColumnRangeChartComponent} from './column-range-chart.component'
-import {HighchartsTestingModule} from 'ngx-highcharts-lazy'
 
 describe(`Column Range Chart Component`, () => {
   let comp: ColumnRangeChartComponent

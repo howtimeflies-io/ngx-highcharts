@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing'
+import {HighchartsTestingModule} from '@howtimeflies/ngx-highcharts'
 
 import {LineChartComponent} from './line-chart.component'
-import {HighchartsTestingModule} from 'ngx-highcharts-lazy'
 
 describe(`Line Chart Component`, () => {
   let comp: LineChartComponent

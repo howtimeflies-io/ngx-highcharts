@@ -4,7 +4,7 @@ import { Component } from '@angular/core'
   selector: 'app-root',
   template: `
     <div>
-      <h1>ngx-highcharts-lazy examples</h1>
+      <h1>@howtimeflies/ngx-highcharts examples</h1>
       <ul>
         <li><a href [routerLink]="['line-chart']">Line Chart</a></li>
         <li><a href [routerLink]="['area-chart']">Area Chart</a></li>
