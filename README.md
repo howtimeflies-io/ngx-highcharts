@@ -1,28 +1,201 @@
-# ngx-highcharts-lazy
-The Angular 2+ wrapper of Highcharts, which could be lazy-loaded from CDN
+# ngx-highcharts
+A Highcharts wrapper for Angular (version 2 and newer)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.8.
+* lazy-loading the Highcharts library (60+ KB gzipped) and any additional modules from CDN or your own distribution
+* strong typed (thanks to [@types/highcharts](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/highcharts))
+* automatically resize the charts to fulfill its container
+* easy installation, configuration, usage and testing, with [examples](https://github.com/howtimeflies-io/ngx-highcharts/tree/master/example)
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```bash
+yarn add https://github.com/howtimeflies-io/ngx-highcharts.git
+yarn add @types/highcharts --dev
+```
+or
+```bash
+npm install --save https://github.com/howtimeflies-io/ngx-highcharts.git
+npm install --save-dev @types/highcharts
+```
 
-## Code scaffolding
+## Configuration
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Set the typings in tsconfig.json
+```json
+{
+  "compilerOptions": {
+    "typeRoots": [
+      "node_modules/@types",
+      "node_modules/@howtimeflies/ngx-highcharts/src/@types"
+    ]
+  }
+}
+```
 
-## Build
+Import the module and set the configuration options in app.module.ts
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+```typescript
+import { HighchartsConfig, HighchartsModule } from '@howtimeflies/ngx-highcharts'
 
-## Running unit tests
+const config: HighchartsConfig = {
+  cdnBaseUrl: 'https://code.highcharts.com',
+  scriptName: 'highcharts.js',
+  delayToExecuteModulesCode: 200,
+  maxDelayToResizeContainer: 10000,
+  globalOptions: {
+    lang: {
+      drillUpText: 'Drill-Up'
+    }
+  }
+}
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+@NgModule({
+  imports: [
+    ...,
+    HighchartsModule
+  ],
+  providers: [
+    { provide: HighchartsConfig, useValue: config }
+  ],
+  bootstrap: [...]
+})
+export class AppModule { }
+```
 
-## Running end-to-end tests
+The default configuration options are
+```typescript
+public static defaultConfig: HighchartsConfig = {
+  // The base url of the Highcharts library on CDN
+  cdnBaseUrl: 'https://unpkg.com/highcharts',
+  // The javascript file name of the Highcharts library. We could set it to 'highcharts.src.js' in debugging.
+  scriptName: 'highcharts.js',
+  // The delay in milliseconds to execute the additional Highcharts modules.
+  delayToExecuteModulesCode: 500,
+  // The max delay in milliseconds to wait the browser to draw the chart. 
+  // Only after the chart element is available on DOM, we could resize it to fulfill its container
+  maxDelayToResizeContainer: 10000,
+  // The global options of Highcharts as listed in https://api.highcharts.com/highcharts/lang
+  globalOptions: {}
+}
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+If you would like to use the default configuration options, simply provide an empty object to `HighchartsConfig`
+```typescript
+   { provide: HighchartsConfig, useValue: {} }
+```
 
-## Further help
+The missing options in your custom config would be set with the ones from the default config.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Usage
+
+Add a `<ngx-highchart>` element to the HTML template. **It must be wrapped in a parent container.**
+
+```angular2html
+<div class="chart-container">
+  <ngx-highchart [options]="options" (load)="chart = $event.chart"></ngx-highchart>
+</div>
+```
+
+Set the chart options in the typescript code, and get the chart object in the `load` event handler.
+
+```typescript
+export class ChartComponent {
+  public options: Highcharts.Options = {
+    chart: { type: 'area' },
+    series:[
+      {
+        name: 'name',
+        data: []
+      }
+    ],
+    ...
+  }
+
+  public chart: Highcharts.ChartObject
+}
+```
+
+Update the chart data dynamically.
+
+```typescript
+this.chart.series[0].setData([1, 0, 3, null, 3, 1, 2, 1])
+
+this.chart.addSeries({
+  name: 'John',
+  data: [0, 1, 4, 4, 5, 2, 3, 7]
+})
+```
+
+If some additional highcharts modules are required, set them in the `modules` attribute.
+
+```angular2html
+<div class="chart-container">
+  <ngx-highchart [options]="options" [modules]="['modules/drilldown', 'highcharts-more']"
+                 (load)="onLoad($event)"></ngx-highchart>
+</div>
+```
+
+Set event handlers to the chart
+
+```typescript
+public onLoad(evt: {chart: Highcharts.ChartObject, highcharts: Highcharts.Static}) {
+  this.chart = evt.chart
+
+  evt.chart.series[0].setData(this.data)
+  evt.highcharts.addEvent(evt.chart, 'drilldown', it => this.onDrillDown(it))
+}
+
+private onDrillDown(evt) {
+  const data = this.drillDownData.find(it => it.name === evt.point.name)
+  this.chart.addSeriesAsDrilldown(evt.point, data)
+}
+```
+
+## Test
+
+Install the Highcharts library as a dev dependency: `yarn add highcharts --dev` or `npm install --save-dev highcharts`
+
+Verify the chart data and event handler
+```typescript
+describe(`Drill-down Chart Component`, () => {
+  let comp: DrilldownChartComponent
+  let fixture: ComponentFixture<DrilldownChartComponent>
+
+  // add the required modules
+  const highcharts = require('highcharts/highcharts.src')
+  require('highcharts/modules/drilldown.src')(highcharts)
+
+  beforeEach(async(() => {
+    fixture = TestBed.configureTestingModule({
+      declarations: [DrilldownChartComponent],
+      // import the module for testing
+      imports: [HighchartsTestingModule]
+    }).createComponent(DrilldownChartComponent)
+
+    fixture.detectChanges()
+    comp = fixture.componentInstance
+  }))
+
+  it(`should display the data on chart`, () => {
+    // retrieve the data from the chart object
+    const data = comp.chart.series[0].data.map((it: Highcharts.DataPoint) => [it.name, it.y])
+
+    // verify the data
+    expect(data).toContainEqual(['IE', 56.33])
+    expect(data).toContainEqual(['Chrome', 24.03])
+  })
+
+  it(`should drill down to a pie`, () => {
+    let data = null
+    // spy on the expecting behavior
+    spyOn(comp.chart, 'addSeriesAsDrilldown').and.callFake((x, drillDownData) => data = drillDownData)
+    const point = comp.chart.series[0].data[0]
+    // simulate an event on the chart object
+    highcharts.fireEvent(comp.chart, 'drilldown', {point})
+
+    // verify the data
+    expect(data.name).toEqual('IE')
+    expect(data.data).toContainEqual(['v11.0', 24.13])
+  })
+})
+```

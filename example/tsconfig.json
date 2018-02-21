@@ -10,7 +10,7 @@
     "target": "es5",
     "typeRoots": [
       "node_modules/@types",
-      "node_modules/ngx-highcharts-lazy/src/@types"
+      "node_modules/@howtimeflies/ngx-highcharts/src/@types"
     ],
     "lib": [
       "es2017",
