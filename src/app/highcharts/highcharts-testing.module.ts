@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core'
 import { HighchartComponent } from './highchart.component'
 import { HighchartsService } from './highcharts.service'
-import { HighchartsConfig } from './index'
+import { HighchartsConfig } from './highcharts.config'
 import { of } from 'rxjs/observable/of'
 
 @NgModule({

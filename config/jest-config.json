@@ -8,9 +8,14 @@
     "__TRANSFORM_HTML__": true
   },
   "setupTestFrameworkScriptFile": "<rootDir>/config/jest.ts",
+  "testPathIgnorePatterns": [
+    "/node_modules/",
+    "/example/"
+  ],
   "collectCoverage": true,
   "collectCoverageFrom": [
     "src/app/**/*.ts",
+    "!example/**",
     "!**/node_modules/**",
     "!**/*.{module,routes,d,spec}.ts"
   ],

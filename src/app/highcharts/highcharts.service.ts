@@ -3,7 +3,8 @@ import { Observable } from 'rxjs/Observable'
 import { forkJoin } from 'rxjs/observable/forkJoin'
 import { of } from 'rxjs/observable/of'
 import { delay, mergeMap, tap } from 'rxjs/operators'
-import { LazyAssetLoader, waitUntilObjectAvailable } from '../helper'
+import { waitUntilObjectAvailable } from '../helper/helper'
+import { LazyAssetLoader } from '../helper/lazy-asset-loader'
 import { HighchartsConfig } from './highcharts.config'
 
 @Injectable()
@@ -40,7 +41,7 @@ export class HighchartsService {
       // delay a few ms to have the modules' javascript code executed
       // otherwise it would throw the errors like https://www.highcharts.com/errors/17
       // Is there any reliable solution to check if the code inside the new added <script> tag is executed?
-      mergeMap(arr => arr.some(it => it) ? of(highcharts).pipe(delay(millis)) : of(highcharts))
+      mergeMap(arr => arr.some(it => !!it) ? of(highcharts).pipe(delay(millis)) : of(highcharts))
     )
   }
 

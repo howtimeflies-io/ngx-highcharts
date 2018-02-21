@@ -1,6 +1,6 @@
 import { fakeAsync, tick } from '@angular/core/testing'
 import { of } from 'rxjs/observable/of'
-import { LazyAssetLoader } from '../helper'
+import { LazyAssetLoader } from '../helper/lazy-asset-loader'
 import { HighchartsService } from './highcharts.service'
 
 describe(`Highcharts Service`, () => {

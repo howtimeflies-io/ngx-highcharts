@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core'
 import { Subscription } from 'rxjs/Subscription'
-import { safeChainedProperty, waitUntilObjectAvailable } from '../helper'
+import { safeChainedProperty, waitUntilObjectAvailable } from '../helper/helper'
 import { HighchartsConfig } from './highcharts.config'
 import { HighchartsService } from './highcharts.service'
 
