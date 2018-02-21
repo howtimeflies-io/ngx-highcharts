@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core'
+import {AfterViewInit, Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, Output} from '@angular/core'
 import { Subscription } from 'rxjs/Subscription'
 import { safeChainedProperty, waitUntilObjectAvailable } from '../helper/helper'
 import { HighchartsConfig } from './highcharts.config'
@@ -28,7 +28,8 @@ export class HighchartComponent implements AfterViewInit, OnDestroy {
 
   constructor(private highchartsService: HighchartsService,
               private config: HighchartsConfig,
-              private element: ElementRef) {}
+              // https://github.com/angular/angular/issues/13087#issuecomment-262991452
+              @Inject(ElementRef) private element: ElementRef) {}
 
   @Input() public set modules(modules: string[]) {
     this._modules = modules || []
