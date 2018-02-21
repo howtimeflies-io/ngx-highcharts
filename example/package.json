@@ -8,7 +8,8 @@
     "build": "ng build --prod",
     "test": "jest --config config/jest-config.json",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "preinstall": "rm -rf node_modules/@howtimeflies/ngx-highcharts && cp -r ../dist node_modules/@howtimeflies/ngx-highcharts"
   },
   "private": true,
   "dependencies": {
