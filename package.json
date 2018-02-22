@@ -1,7 +1,17 @@
 {
   "name": "@howtimeflies/ngx-highcharts",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "A Highcharts wrapper for Angular (version 2 and newer)",
+  "keywords": [
+    "angular",
+    "angular2",
+    "angular4",
+    "angular5",
+    "highcharts",
+    "lazy",
+    "typescript",
+    "resize"
+  ],
   "main": "./bundles/howtimefleis-ngx-highcharts.umd.js",
   "module": "./esm5/howtimefleis-ngx-highcharts.js",
   "es2015": "./esm2015/howtimefleis-ngx-highcharts.js",
@@ -13,7 +23,7 @@
     "test": "jest --config config/jest-config.json",
     "lint": "tslint \"src/**/*.ts\" --project tsconfig.json",
     "packagr": "ng-packagr -p package.json",
-    "publish": "npm publish dist --access=public"
+    "pub": "npm run build && npm publish dist --access public "
   },
   "peerDependencies": {
     "@angular/core": "latest",
@@ -21,10 +31,10 @@
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
-    "@angular/core": "latest",
     "@angular/common": "latest",
     "@angular/compiler": "latest",
     "@angular/compiler-cli": "latest",
+    "@angular/core": "latest",
     "@angular/platform-browser": "latest",
     "@angular/platform-browser-dynamic": "latest",
     "@types/highcharts": "latest",

@@ -161,10 +161,11 @@ describe(`Drill-down Chart Component`, () => {
   let comp: DrilldownChartComponent
   let fixture: ComponentFixture<DrilldownChartComponent>
 
-  // add the required modules
+  // add the required modules if needed
   const highcharts = require('highcharts/highcharts.src')
   require('highcharts/modules/drilldown.src')(highcharts)
-
+  window['Highcharts'] = highcharts
+  
   beforeEach(async(() => {
     fixture = TestBed.configureTestingModule({
       declarations: [DrilldownChartComponent],

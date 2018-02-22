@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core'
-import { HighchartComponent } from './highchart.component'
+import { HighchartsModule } from './highcharts.module'
 import { HighchartsService } from './highcharts.service'
 import { HighchartsConfig } from './highcharts.config'
 import { of } from 'rxjs/observable/of'
 
 @NgModule({
-  declarations: [HighchartComponent],
-  exports: [HighchartComponent],
+  imports: [HighchartsModule],
+  exports: [HighchartsModule],
   providers: [
     { provide: HighchartsConfig, useValue: {maxDelayToResizeContainer: 10} },
     { provide: HighchartsService, useFactory: mockHighchartsService },
