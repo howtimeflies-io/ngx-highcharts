@@ -14,7 +14,7 @@
   ],
   "collectCoverage": true,
   "collectCoverageFrom": [
-    "src/app/**/*.ts",
+    "src/**/*.ts",
     "!example/**",
     "!**/node_modules/**",
     "!**/*.{module,routes,d,spec}.ts"
@@ -25,6 +25,5 @@
     "text-summary",
     "html"
   ],
-  "mapCoverage": true,
   "coverageDirectory": "<rootDir>/coverage"
 }
