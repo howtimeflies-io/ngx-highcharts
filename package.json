@@ -1,6 +1,6 @@
 {
   "name": "@howtimeflies/ngx-highcharts",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "A Highcharts wrapper for Angular (version 4 and newer)",
   "keywords": [
     "angular",
