@@ -36,7 +36,7 @@ jobs:
       - run: yarn test && yarn build
 
       - store_artifacts:
-          path: /coverage
+          path: coverage
 
       - store_artifacts:
-          path: /dist
+          path: dist
