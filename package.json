@@ -26,7 +26,8 @@
     "test": "jest --config config/jest-config.json",
     "lint": "tslint \"src/**/*.ts\" --project tsconfig.json",
     "pub": "npm run build && npm publish dist --access public ",
-    "linkage": "mkdir -p dist && cd dist && cp ../package.json package.json && yarn link && cd ../testing && yarn link @howtimeflies/ngx-highcharts"
+    "linkage": "mkdir -p dist && cd dist && cp ../package.json package.json && yarn link && cd ../testing && yarn link @howtimeflies/ngx-highcharts",
+    "postinstall": "npm rebuild node-sass"
   },
   "peerDependencies": {
     "@angular/common": ">=4.3.0 || >5.0.0",
