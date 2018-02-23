@@ -1,5 +1,5 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing'
-import {HighchartsTestingModule} from '@howtimeflies/ngx-highcharts'
+import {HighchartsTestingModule} from '@howtimeflies/ngx-highcharts/testing'
 
 import {AreaChartComponent} from './area-chart.component'
 

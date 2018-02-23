@@ -1,5 +1,5 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing'
-import {HighchartsTestingModule} from '@howtimeflies/ngx-highcharts'
+import {HighchartsTestingModule} from '@howtimeflies/ngx-highcharts/testing'
 
 import {ColumnRangeChartComponent} from './column-range-chart.component'
 
@@ -8,7 +8,9 @@ describe(`Column Range Chart Component`, () => {
   let fixture: ComponentFixture<ColumnRangeChartComponent>
 
   // add the required module
-  require('highcharts/highcharts-more.src')(require('highcharts/highcharts.src'))
+  const highcharts = require('highcharts/highcharts.src')
+  require('highcharts/highcharts-more.src')(highcharts)
+  window['Highcharts'] = highcharts
 
   beforeEach(async(() => {
     fixture = TestBed.configureTestingModule({

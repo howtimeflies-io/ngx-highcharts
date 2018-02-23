@@ -1,5 +1,5 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing'
-import {HighchartsTestingModule} from '@howtimeflies/ngx-highcharts'
+import {HighchartsTestingModule} from '@howtimeflies/ngx-highcharts/testing'
 
 import {WordcloudChartComponent} from './wordcloud-chart.component'
 
@@ -10,6 +10,7 @@ describe(`Word-Cloud Chart Component`, () => {
   // add the required module
   const highcharts = require('highcharts/highcharts.src')
   require('highcharts/modules/wordcloud.src')(highcharts)
+  window['Highcharts'] = highcharts
 
   beforeEach(async(() => {
     fixture = TestBed.configureTestingModule({
