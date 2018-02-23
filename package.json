@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A Highcharts wrapper for Angular (version 4 and newer)",
   "keywords": [
+    "ngx-highcharts",
+    "ng-highcharts",
+    "angular-highcharts",
     "angular",
     "highcharts",
     "lazy",
