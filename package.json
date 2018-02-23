@@ -19,11 +19,11 @@
   "author": "howtimeflies.io dev",
   "license": "MIT",
   "scripts": {
-    "build": "ng-packagr -p package.json",
+    "build": "yarn linkage && ng-packagr -p package.json",
     "test": "jest --config config/jest-config.json",
     "lint": "tslint \"src/**/*.ts\" --project tsconfig.json",
-    "packagr": "ng-packagr -p package.json",
-    "pub": "npm run build && npm publish dist --access public "
+    "pub": "npm run build && npm publish dist --access public ",
+    "linkage": "cd dist && cp ../package.json package.json && yarn link && cd ../testing && yarn link @howtimeflies/ngx-highcharts"
   },
   "peerDependencies": {
     "@angular/core": "latest",
@@ -44,7 +44,7 @@
     "highcharts": "latest",
     "jest": "^22.1.4",
     "jest-preset-angular": "^5.0.0",
-    "ng-packagr": "^2.0.0",
+    "ng-packagr": "^2.1.0",
     "rxjs": "^5.5.0",
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",
