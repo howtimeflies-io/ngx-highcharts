@@ -26,7 +26,7 @@
     "test": "jest --config config/jest-config.json",
     "lint": "tslint \"src/**/*.ts\" --project tsconfig.json",
     "pub": "npm run build && npm publish dist --access public ",
-    "linkage": "mkdir dist && cd dist && cp ../package.json package.json && yarn link && cd ../testing && yarn link @howtimeflies/ngx-highcharts"
+    "linkage": "mkdir -p dist && cd dist && cp ../package.json package.json && yarn link && cd ../testing && yarn link @howtimeflies/ngx-highcharts"
   },
   "peerDependencies": {
     "@angular/common": ">=4.3.0 || >5.0.0",
@@ -34,25 +34,25 @@
     "typescript": ">=2.3.0"
   },
   "devDependencies": {
-    "@angular/common": "latest",
-    "@angular/compiler": "latest",
-    "@angular/compiler-cli": "latest",
-    "@angular/core": "latest",
-    "@angular/platform-browser": "latest",
-    "@angular/platform-browser-dynamic": "latest",
+    "@angular/common": "^5.2.6",
+    "@angular/compiler": "^5.2.6",
+    "@angular/compiler-cli": "^5.2.6",
+    "@angular/core": "^5.2.6",
+    "@angular/platform-browser": "^5.2.6",
+    "@angular/platform-browser-dynamic": "^5.2.6",
     "@types/highcharts": "latest",
-    "@types/jest": "^22.0.1",
-    "@types/node": "~6.0.60",
-    "codelyzer": "^4.0.1",
+    "@types/jest": "latest",
+    "@types/node": "latest",
+    "codelyzer": "latest",
     "highcharts": "latest",
     "jest": "^22.1.4",
-    "jest-preset-angular": "^5.0.0",
-    "ng-packagr": "^2.1.0",
-    "rxjs": "^5.5.0",
-    "ts-node": "~4.1.0",
-    "tslint": "~5.9.1",
+    "jest-preset-angular": "latest",
+    "ng-packagr": "latest",
+    "rxjs": "latest",
+    "ts-node": "latest",
+    "tslint": "latest",
     "typescript": "~2.5.3",
-    "zone.js": "^0.8.4"
+    "zone.js": "latest"
   },
   "repository": {
     "type": "git",

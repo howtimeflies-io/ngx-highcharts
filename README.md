@@ -1,5 +1,7 @@
 [![CircleCI](https://circleci.com/gh/howtimeflies-io/ngx-highcharts/tree/master.svg?style=shield)](https://circleci.com/gh/howtimeflies-io/ngx-highcharts/tree/master)
 [![codecov](https://codecov.io/gh/howtimeflies-io/ngx-highcharts/branch/master/graph/badge.svg)](https://codecov.io/gh/howtimeflies-io/ngx-highcharts)
+[![peerDependencies](https://david-dm.org/howtimeflies-io/ngx-highcharts/peer-status.svg)](https://david-dm.org/howtimeflies-io/ngx-highcharts#info=peerDependencies)
+[![devDependencies](https://david-dm.org/howtimeflies-io/ngx-highcharts/dev-status.svg)](https://david-dm.org/howtimeflies-io/ngx-highcharts#info=devDependencies)
 
 # ngx-highcharts
 A Highcharts wrapper for Angular (version 2 and newer)
