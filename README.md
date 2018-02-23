@@ -1,12 +1,16 @@
-[![CircleCI](https://circleci.com/gh/howtimeflies-io/ngx-highcharts/tree/master.svg?style=shield)](https://circleci.com/gh/howtimeflies-io/ngx-highcharts/tree/master)
-[![codecov](https://codecov.io/gh/howtimeflies-io/ngx-highcharts/branch/master/graph/badge.svg)](https://codecov.io/gh/howtimeflies-io/ngx-highcharts)
-[![peerDependencies](https://david-dm.org/howtimeflies-io/ngx-highcharts/peer-status.svg)](https://david-dm.org/howtimeflies-io/ngx-highcharts?type=peer)
-[![devDependencies](https://david-dm.org/howtimeflies-io/ngx-highcharts/dev-status.svg)](https://david-dm.org/howtimeflies-io/ngx-highcharts?type=dev)
+[![CircleCI](https://img.shields.io/circleci/project/github/howtimeflies-io/ngx-highcharts.svg)](https://circleci.com/gh/howtimeflies-io/ngx-highcharts/tree/master)
+[![Codecov](https://img.shields.io/codecov/c/github/howtimeflies-io/ngx-highcharts.svg)](https://codecov.io/gh/howtimeflies-io/ngx-highcharts)
+[![dependencies](https://img.shields.io/david/howtimeflies-io/ngx-highcharts.svg)](https://david-dm.org/howtimeflies-io/ngx-highcharts)
+[![devDependencies](https://img.shields.io/david/dev/howtimeflies-io/ngx-highcharts.svg)](https://david-dm.org/howtimeflies-io/ngx-highcharts?type=dev)
+[![peerDependencies](https://img.shields.io/david/peer/howtimeflies-io/ngx-highcharts.svg)](https://david-dm.org/howtimeflies-io/ngx-highcharts?type=peer)
+
+[![npm](https://img.shields.io/npm/v/@howtimeflies/ngx-highcharts.svg)](https://www.npmjs.com/package/@howtimeflies/ngx-highcharts)
+[![downloads](https://img.shields.io/npm/dm/@howtimeflies/ngx-highcharts.svg)](https://www.npmjs.com/package/@howtimeflies/ngx-highcharts)
 
 # ngx-highcharts
-A Highcharts wrapper for Angular (version 2 and newer)
+A Highcharts wrapper for Angular (version 4 and newer)
 
-* lazy-loading the Highcharts library (60+ KB gzipped) and any additional modules from CDN or your own distribution
+* lazily-load the Highcharts library (60+ KB gzipped) and any additional modules from CDN or your own distribution
 * strong typed (thanks to [@types/highcharts](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/highcharts))
 * automatically resize the charts to fulfill its container
 * easy installation, configuration, usage and testing, with [examples](https://github.com/howtimeflies-io/ngx-highcharts/tree/master/example)
@@ -14,12 +18,12 @@ A Highcharts wrapper for Angular (version 2 and newer)
 ## Installation
 
 ```bash
-yarn add https://github.com/howtimeflies-io/ngx-highcharts.git
+yarn add @howtimeflies/ngx-highcharts
 yarn add @types/highcharts --dev
 ```
 or
 ```bash
-npm install --save https://github.com/howtimeflies-io/ngx-highcharts.git
+npm install --save @howtimeflies/ngx-highcharts
 npm install --save-dev @types/highcharts
 ```
 
