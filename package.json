@@ -26,9 +26,9 @@
     "linkage": "cd dist && cp ../package.json package.json && yarn link && cd ../testing && yarn link @howtimeflies/ngx-highcharts"
   },
   "peerDependencies": {
-    "@angular/core": "latest",
-    "rxjs": "^5.5.0",
-    "zone.js": "^0.8.4"
+    "@angular/common": ">=4.3.0 || >5.0.0",
+    "rxjs": ">=5.4.3",
+    "typescript": ">=2.3.0"
   },
   "devDependencies": {
     "@angular/common": "latest",
@@ -55,6 +55,7 @@
     "type": "git",
     "url": "https://github.com/howtimeflies-io/ngx-highcharts.git"
   },
+  "bugs": "https://github.com/howtimeflies-io/ngx-highcharts/issues",
   "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
   "ngPackage": {
     "lib": {
