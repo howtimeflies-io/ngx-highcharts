@@ -1,16 +1,19 @@
 {
   "name": "@howtimeflies/ngx-highcharts",
   "version": "0.1.1",
-  "description": "A Highcharts wrapper for Angular (version 2 and newer)",
+  "description": "A Highcharts wrapper for Angular (version 4 and newer)",
   "keywords": [
     "angular",
-    "angular2",
-    "angular4",
-    "angular5",
     "highcharts",
     "lazy",
     "typescript",
-    "resize"
+    "resize",
+    "angular4",
+    "angular5",
+    "ng",
+    "ngx",
+    "ng4",
+    "ng5"
   ],
   "main": "./bundles/howtimefleis-ngx-highcharts.umd.js",
   "module": "./esm5/howtimefleis-ngx-highcharts.js",
