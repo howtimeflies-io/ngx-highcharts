@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/howtimeflies-io/ngx-highcharts/tree/master.svg?style=shield)](https://circleci.com/gh/howtimeflies-io/ngx-highcharts/tree/master)
+
 # ngx-highcharts
 A Highcharts wrapper for Angular (version 2 and newer)
 
