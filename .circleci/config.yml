@@ -3,6 +3,10 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
+general:
+  artifacts:
+    - "dist"
+    - "coverage"
 jobs:
   build:
     docker:
