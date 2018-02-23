@@ -39,6 +39,8 @@ jobs:
           path: dist
 
   test:
+    docker:
+      - image: circleci/node:7.10
     steps:
       - run: yarn test && yarn build
 
