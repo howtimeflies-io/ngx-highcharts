@@ -11,7 +11,10 @@ interface Size {
 
 @Component({
   selector: 'ngx-highchart',
-  template: `&nbsp;`
+  template: `&nbsp;`,
+  styles: [
+    `ngx-highchart { display: block }`
+  ]
 })
 export class HighchartComponent implements AfterViewInit, OnDestroy {
 

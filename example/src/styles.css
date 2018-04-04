@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+.chart-container {
+  height: 280px;
+}
+@media (min-width: 576px) {
+  .chart-container {
+    height: 400px;
+  }
+}
