@@ -31,7 +31,7 @@
     "@angular/cli": "1.6.8",
     "@angular/compiler-cli": "^5.2.0",
     "@angular/language-service": "^5.2.0",
-    "@types/highcharts": "^5.0.15",
+    "@types/highcharts": "^5.0.22",
     "@types/jest": "^22.0.1",
     "@types/node": "~6.0.60",
     "codelyzer": "^4.0.1",

@@ -166,7 +166,7 @@
     js-tokens "^3.0.0"
 
 "@howtimeflies/ngx-highcharts@file:../dist":
-  version "0.0.0"
+  version "1.0.2"
   dependencies:
     tslib "^1.7.1"
 
@@ -197,9 +197,9 @@
   version "7946.0.1"
   resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.1.tgz#1fc41280e42f08f0d568401a556bc97c34f5262e"
 
-"@types/highcharts@^5.0.15":
-  version "5.0.16"
-  resolved "https://registry.yarnpkg.com/@types/highcharts/-/highcharts-5.0.16.tgz#c85281ac496961d72c867d0b1667d43a088e7f51"
+"@types/highcharts@^5.0.22":
+  version "5.0.22"
+  resolved "https://registry.yarnpkg.com/@types/highcharts/-/highcharts-5.0.22.tgz#60ebd8857c4a81e33360e623551d1e7ec896c759"
   dependencies:
     "@types/geojson" "*"
 

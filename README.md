@@ -29,18 +29,6 @@ npm install --save-dev @types/highcharts
 
 ## Configuration
 
-Set the typings in tsconfig.json
-```json
-{
-  "compilerOptions": {
-    "typeRoots": [
-      "node_modules/@types",
-      "node_modules/@howtimeflies/ngx-highcharts/src/@types"
-    ]
-  }
-}
-```
-
 Import the module and set the configuration options in app.module.ts
 
 ```typescript

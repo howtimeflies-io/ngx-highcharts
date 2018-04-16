@@ -9,8 +9,11 @@
     "experimentalDecorators": true,
     "target": "es5",
     "typeRoots": [
-      "src/@types",
       "node_modules/@types"
+    ],
+    "types": [
+      "jest",
+      "highcharts"
     ],
     "lib": [
       "es2017",
