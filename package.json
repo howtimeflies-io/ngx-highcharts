@@ -1,6 +1,6 @@
 {
   "name": "@howtimeflies/ngx-highcharts",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "A Highcharts wrapper for Angular (version 4 and newer)",
   "keywords": [
     "ngx-highcharts",
@@ -13,10 +13,12 @@
     "resize",
     "angular4",
     "angular5",
+    "angular6",
     "ng",
     "ngx",
     "ng4",
-    "ng5"
+    "ng5",
+    "ng6"
   ],
   "main": "./bundles/howtimefleis-ngx-highcharts.umd.js",
   "module": "./esm5/howtimefleis-ngx-highcharts.js",
