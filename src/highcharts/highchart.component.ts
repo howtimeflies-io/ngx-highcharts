@@ -69,7 +69,7 @@ export class HighchartComponent implements AfterViewInit, OnDestroy {
       return null
     }
     const maxDelay = this.config.maxDelayToResizeContainer || 10000
-    waitUntilObjectAvailable(getSize, maxDelay).then(size => this.resizeChart(size))
+    waitUntilObjectAvailable(getSize, maxDelay).then(size => this.resizeChart(size)).catch(() => null)
   }
 
   private resizeChart(size: Size) {
