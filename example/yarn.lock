@@ -166,9 +166,9 @@
     js-tokens "^3.0.0"
 
 "@howtimeflies/ngx-highcharts@file:../dist":
-  version "1.0.2"
+  version "1.0.3"
   dependencies:
-    tslib "^1.7.1"
+    tslib "^1.9.0"
 
 "@ngtools/json-schema@1.1.0", "@ngtools/json-schema@^1.1.0":
   version "1.1.0"
@@ -6530,6 +6530,10 @@ tsickle@^0.26.0:
 tslib@^1.7.1, tslib@^1.8.0, tslib@^1.8.1:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
+
+tslib@^1.9.0:
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.2.tgz#8be0cc9a1f6dc7727c38deb16c2ebd1a2892988e"
 
 tslint@~5.9.1:
   version "5.9.1"
