@@ -16,7 +16,7 @@ describe('Lazy Asset Loader', () => {
 
   it(`should load a css`, fakeAsync(() => {
     let isCssLoaded = null
-    LazyAssetLoader.loadCss('bootstrap.min.css').subscribe(result => isCssLoaded = result, failure)
+    LazyAssetLoader.loadCss('bootstrap.min.css').then(result => isCssLoaded = result).catch(failure)
 
     tag.onload(new Event('load'))
 
@@ -25,7 +25,7 @@ describe('Lazy Asset Loader', () => {
   }))
 
   it(`should load a script`, fakeAsync(() => {
-    LazyAssetLoader.loadScript('angular.js').subscribe(result => isScriptNewLoaded = result, failure)
+    LazyAssetLoader.loadScript('angular.js').then(result => isScriptNewLoaded = result).catch(failure)
 
     tag.onload(new Event('load'))
 
@@ -35,8 +35,8 @@ describe('Lazy Asset Loader', () => {
 
   it(`should not load a duplicated script if it is still loading`, fakeAsync(() => {
     let isDuplicatedScriptNewLoaded = null
-    LazyAssetLoader.loadScript('howtimeflies.js').subscribe(result => isScriptNewLoaded = result, failure)
-    LazyAssetLoader.loadScript('howtimeflies.js').subscribe(result => isDuplicatedScriptNewLoaded = result, failure)
+    LazyAssetLoader.loadScript('howtimeflies.js').then(result => isScriptNewLoaded = result).catch(failure)
+    LazyAssetLoader.loadScript('howtimeflies.js').then(result => isDuplicatedScriptNewLoaded = result).catch(failure)
 
     tag.onload(new Event('load'))
 
@@ -48,12 +48,12 @@ describe('Lazy Asset Loader', () => {
 
   it(`should not load a duplicated script if it is already loaded`, fakeAsync(() => {
     let isDuplicatedScriptNewLoaded = null
-    LazyAssetLoader.loadScript('howtimeflies.js?v=2').subscribe(result => isScriptNewLoaded = result, failure)
+    LazyAssetLoader.loadScript('howtimeflies.js?v=2').then(result => isScriptNewLoaded = result).catch(failure)
 
     tag.onload(new Event('load'))
     tick()
 
-    LazyAssetLoader.loadScript('howtimeflies.js?v=2').subscribe(result => isDuplicatedScriptNewLoaded = result, failure)
+    LazyAssetLoader.loadScript('howtimeflies.js?v=2').then(result => isDuplicatedScriptNewLoaded = result).catch(failure)
     tick()
 
     expect(isScriptNewLoaded).toBeTruthy()
@@ -64,11 +64,11 @@ describe('Lazy Asset Loader', () => {
   it(`should load the script again if it was failed to load`, fakeAsync(() => {
     let isFailed = null
 
-    LazyAssetLoader.loadScript('howtimeflies.js?v=3').subscribe(failure, () => isFailed = true)
+    LazyAssetLoader.loadScript('howtimeflies.js?v=3').then(failure).catch(() => isFailed = true)
     tag.onerror(new ErrorEvent('error'))
     tick()
 
-    LazyAssetLoader.loadScript('howtimeflies.js?v=3').subscribe(result => isScriptNewLoaded = result, failure)
+    LazyAssetLoader.loadScript('howtimeflies.js?v=3').then(result => isScriptNewLoaded = result).catch(failure)
     tag.onload(new Event('load'))
     tick()
 

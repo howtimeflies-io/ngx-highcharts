@@ -1,14 +1,9 @@
-import { Observable } from 'rxjs/Observable'
-import { fromPromise } from 'rxjs/observable/fromPromise'
-import { of } from 'rxjs/observable/of'
-import { map } from 'rxjs/operators'
-
 export class LazyAssetLoader {
 
   private static assets: Array<{
     id: string,
     loaded: boolean,
-    observable: Observable<any>
+    promise: Promise<any>
   }> = []
 
   /**
@@ -19,7 +14,7 @@ export class LazyAssetLoader {
    * @returns true if the script is new loaded, otherwise false.
    *   An ErrorObservable would be returned if the asset is failed to load.
    */
-  public static loadScript(src: string): Observable<boolean> {
+  public static loadScript(src: string): Promise<boolean> {
     return LazyAssetLoader.load('script', {
       type: 'text/javascript',
       src
@@ -34,7 +29,7 @@ export class LazyAssetLoader {
    * @returns true if the script is new loaded, otherwise false.
    *   An ErrorObservable would be returned if the asset is failed to load.
    */
-  public static loadCss(href: string): Observable<boolean> {
+  public static loadCss(href: string): Promise<boolean> {
     return LazyAssetLoader.load('link', {
       rel: 'stylesheet',
       href
@@ -49,14 +44,14 @@ export class LazyAssetLoader {
    * @returns true if the asset is new loaded, otherwise false.
    *   An ErrorObservable would be returned if the asset is failed to load.
    */
-  private static load(tagName: string, props: {}): Observable<boolean> {
+  private static load(tagName: string, props: {}): Promise<boolean> {
     const id = JSON.stringify({...props, tagName})
     if (LazyAssetLoader.assets.some(it => it.loaded && it.id === id)) {
-      return of(false)
+      return Promise.resolve(false)
     }
-    const loadingAsset = LazyAssetLoader.assets.find(it => !it.loaded && it.id === id && it.observable != null)
+    const loadingAsset = LazyAssetLoader.assets.find(it => !it.loaded && it.id === id && it.promise != null)
     if (loadingAsset) {
-      return loadingAsset.observable.pipe(map(() => false))
+      return loadingAsset.promise.then(() => false)
     }
 
     const tag = document.createElement(tagName)
@@ -66,12 +61,12 @@ export class LazyAssetLoader {
     const asset = {
       id,
       loaded: false,
-      observable: null as Observable<boolean>
+      promise: null as Promise<boolean>
     }
     const promise = new Promise<boolean>((resolve, reject) => {
       tag.onload = () => {
         asset.loaded = true
-        asset.observable = null
+        asset.promise = null
         resolve(true)
       }
       tag.onerror = (evt: ErrorEvent) => {
@@ -80,10 +75,9 @@ export class LazyAssetLoader {
         reject(evt)
       }
     })
-    const ob = fromPromise(promise)
-    asset.observable = ob
+    asset.promise = promise
     LazyAssetLoader.assets.push(asset)
 
-    return ob
+    return promise
   }
 }

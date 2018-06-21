@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core'
 import { HighchartsConfig, HighchartsModule, HighchartsService } from '@howtimeflies/ngx-highcharts'
-import { of } from 'rxjs/observable/of'
 
 @NgModule({
   imports: [HighchartsModule],
@@ -17,7 +16,7 @@ export function mockHighchartsService(): any {
   const highcharts = window['Highcharts'] || require('highcharts/highcharts.src')
   window['Highcharts'] = highcharts
   return {
-    load: () => of(highcharts),
-    loadModules: () => of(highcharts)
+    load: () => Promise.resolve(highcharts),
+    loadModules: () => Promise.resolve(highcharts)
   }
 }

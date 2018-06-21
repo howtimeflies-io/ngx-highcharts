@@ -1,6 +1,5 @@
 import { Component } from '@angular/core'
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing'
-import { of } from 'rxjs/observable/of'
 import { HighchartComponent } from './highchart.component'
 import { HighchartsConfig } from './highcharts.config'
 import { HighchartsService } from './highcharts.service'
@@ -39,8 +38,8 @@ describe(`Highchart-Component Consumer`, () => {
       load: () => null,
       loadModules: () => null
     }
-    spyOn(service, 'load').and.returnValue(of(highcharts))
-    spyOn(service, 'loadModules').and.returnValue(of(highcharts))
+    spyOn(service, 'load').and.returnValue(Promise.resolve(highcharts))
+    spyOn(service, 'loadModules').and.returnValue(Promise.resolve(highcharts))
 
     width = 0
     height = 0

@@ -1,47 +1,42 @@
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs/Observable'
-import { forkJoin } from 'rxjs/observable/forkJoin'
-import { of } from 'rxjs/observable/of'
-import { delay, mergeMap, tap } from 'rxjs/operators'
-import { waitUntilObjectAvailable } from '../helper/helper'
+import { delay, waitUntilObjectAvailable } from '../helper/helper'
 import { LazyAssetLoader } from '../helper/lazy-asset-loader'
 import { HighchartsConfig } from './highcharts.config'
 
 @Injectable()
 export class HighchartsService {
 
-  private observable: Observable<Highcharts.Static> = null
+  private promise: Promise<Highcharts.Static> = null
   private config: HighchartsConfig
 
   constructor(customConfig: HighchartsConfig) {
     this.config = {...HighchartsConfig.defaultConfig, ...customConfig}
   }
 
-  public load(url?: string): Observable<Highcharts.Static> {
+  public load(url?: string): Promise<Highcharts.Static> {
     if (this.highcharts) {
-      return of(this.highcharts)
+      return Promise.resolve(this.highcharts)
     }
 
-    if (!this.observable) {
+    if (!this.promise) {
       const defaultUrl = `${this.config.cdnBaseUrl}/${this.config.scriptName}`
-      this.observable = LazyAssetLoader.loadScript(url || defaultUrl).pipe(
-        mergeMap(() => waitUntilObjectAvailable(() => this.highcharts, 1000, 20))
-      )
+      this.promise = LazyAssetLoader.loadScript(url || defaultUrl).then(() => waitUntilObjectAvailable(() => this.highcharts, 1000, 20))
     }
-    return this.observable
+    return this.promise
   }
 
-  public loadModules(modules: string[]): Observable<Highcharts.Static>  {
-    let highcharts: Highcharts.Static
-    const millis = this.config.delayToExecuteModulesCode
-    return this.load().pipe(
-      tap(it => highcharts = it),
-      mergeMap(() => forkJoin(modules.map(module => LazyAssetLoader.loadScript(this.resolveModuleUrl(module))))),
-      // delay a few ms to have the modules' javascript code executed
-      // otherwise it would throw the errors like https://www.highcharts.com/errors/17
-      // Is there any reliable solution to check if the code inside the new added <script> tag is executed?
-      mergeMap(arr => arr.some(it => !!it) ? of(highcharts).pipe(delay(millis)) : of(highcharts))
-    )
+  public loadModules(modules: string[]): Promise<Highcharts.Static>  {
+    return this.load().then(async highcharts => {
+      let hasNewModuleLoaded = false
+      modules.forEach(async module => {
+        const isNewLoaded = await LazyAssetLoader.loadScript(this.resolveModuleUrl(module))
+        hasNewModuleLoaded = hasNewModuleLoaded || isNewLoaded
+      })
+      if (hasNewModuleLoaded) {
+        await delay(this.config.delayToExecuteModulesCode)
+      }
+      return highcharts
+    })
   }
 
   private get highcharts(): Highcharts.Static {

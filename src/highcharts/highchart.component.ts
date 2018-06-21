@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, Output} from '@angular/core'
-import { Subscription } from 'rxjs/Subscription'
 import { safeChainedProperty, waitUntilObjectAvailable } from '../helper/helper'
 import { HighchartsConfig } from './highcharts.config'
 import { HighchartsService } from './highcharts.service'
@@ -27,8 +26,6 @@ export class HighchartComponent implements AfterViewInit, OnDestroy {
 
   private chart: Highcharts.ChartObject
 
-  private subscription: Subscription
-
   constructor(private highchartsService: HighchartsService,
               private config: HighchartsConfig,
               // https://github.com/angular/angular/issues/13087#issuecomment-262991452
@@ -37,14 +34,14 @@ export class HighchartComponent implements AfterViewInit, OnDestroy {
   @Input() public set modules(modules: string[]) {
     this._modules = modules || []
     if (this._modules.length > 0) {
-      this.highchartsService.loadModules(this._modules).subscribe(() => null)
+      this.highchartsService.loadModules(this._modules).then(() => null)
     }
   }
 
   public ngAfterViewInit() {
     const req = this._modules.length > 0 ? this.highchartsService.loadModules(this._modules)
                                          : this.highchartsService.load()
-    req.subscribe((highcharts: Highcharts.Static) => {
+    req.then((highcharts: Highcharts.Static) => {
       highcharts.setOptions(this.config.globalOptions)
       highcharts.chart(this.element.nativeElement, this.options, it => {
         this.chart = it
@@ -55,9 +52,6 @@ export class HighchartComponent implements AfterViewInit, OnDestroy {
     })
   }
   public ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe()
-    }
     window.removeEventListener('resize', this.resizeHandler)
   }
 
@@ -75,10 +69,7 @@ export class HighchartComponent implements AfterViewInit, OnDestroy {
       return null
     }
     const maxDelay = this.config.maxDelayToResizeContainer || 10000
-    this.subscription = waitUntilObjectAvailable(getSize, maxDelay).subscribe(size => {
-      this.subscription = null
-      this.resizeChart(size)
-    }, () => null)
+    waitUntilObjectAvailable(getSize, maxDelay).then(size => this.resizeChart(size))
   }
 
   private resizeChart(size: Size) {

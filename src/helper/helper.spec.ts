@@ -44,21 +44,20 @@ describe('Helper Methods', () => {
     }
   })
 
-  it(`should return the object immediately if the object is already available`, () => {
+  it(`should return the object immediately if the object is already available`, async () => {
     const obj: TestClass = {
       nested: {
         prop: 'xyz'
       }
     }
-    let val = null
-    waitUntilObjectAvailable(() => obj.nested.prop).subscribe(it => val = it, () => fail('it should not return error'))
+    const val = await waitUntilObjectAvailable(() => obj.nested.prop)
     expect(val).toEqual('xyz')
   })
 
   it(`should return an timed-out error if the object is unavailable`, fakeAsync(() => {
     const obj: TestClass = null
     let err = null
-    waitUntilObjectAvailable(() => obj.nested.prop, 10, 10).subscribe(() => fail('it should not return error'), it => err = it)
+    waitUntilObjectAvailable(() => obj.nested.prop, 10, 10).then(() => fail('it should not return error')).catch(it => err = it)
     tick(99999)
     expect(err).not.toBeNull()
   }))
