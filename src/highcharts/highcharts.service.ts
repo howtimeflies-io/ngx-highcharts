@@ -25,18 +25,13 @@ export class HighchartsService {
     return this.promise
   }
 
-  public loadModules(modules: string[]): Promise<Highcharts.Static>  {
-    return this.load().then(async highcharts => {
-      let hasNewModuleLoaded = false
-      modules.forEach(async module => {
-        const isNewLoaded = await LazyAssetLoader.loadScript(this.resolveModuleUrl(module))
-        hasNewModuleLoaded = hasNewModuleLoaded || isNewLoaded
-      })
-      if (hasNewModuleLoaded) {
-        await delay(this.config.delayToExecuteModulesCode)
-      }
-      return highcharts
-    })
+  public async loadModules(modules: string[]): Promise<Highcharts.Static>  {
+    const highcharts = await this.load()
+    const arr = await Promise.all(modules.map(async module => await LazyAssetLoader.loadScript(this.resolveModuleUrl(module))))
+    if (arr.some(it => it)) {
+      await delay(this.config.delayToExecuteModulesCode)
+    }
+    return highcharts
   }
 
   private get highcharts(): Highcharts.Static {

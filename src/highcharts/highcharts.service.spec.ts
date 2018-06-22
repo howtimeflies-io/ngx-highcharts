@@ -1,6 +1,7 @@
 import { fakeAsync, tick } from '@angular/core/testing'
 import { LazyAssetLoader } from '../helper/lazy-asset-loader'
 import { HighchartsService } from './highcharts.service'
+import * as Helper from '../helper/helper'
 
 describe(`Highcharts Service`, () => {
   let service: HighchartsService
@@ -26,4 +27,10 @@ describe(`Highcharts Service`, () => {
     tick(999999)
     expect(highcharts).not.toBeNull()
   }))
+
+  it(`should delay a few milliseconds to execute the new loaded module`, async () => {
+    spyOn(Helper, 'delay')
+    await service.loadModules(['module/drilldown', 'highcharts-more'])
+    expect(Helper.delay).toHaveBeenCalledTimes(1)
+  })
 })
