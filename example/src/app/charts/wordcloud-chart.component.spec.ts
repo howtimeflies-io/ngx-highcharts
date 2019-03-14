@@ -2,15 +2,14 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing'
 import {HighchartsTestingModule} from '@howtimeflies/ngx-highcharts/testing'
 
 import {WordcloudChartComponent} from './wordcloud-chart.component'
+import * as Highcharts from 'highcharts'
 
 describe(`Word-Cloud Chart Component`, () => {
   let comp: WordcloudChartComponent
   let fixture: ComponentFixture<WordcloudChartComponent>
 
   // add the required module
-  const highcharts = require('highcharts/highcharts.src')
-  require('highcharts/modules/wordcloud.src')(highcharts)
-  window['Highcharts'] = highcharts
+  require('highcharts/modules/wordcloud.src')(Highcharts)
 
   beforeEach(async(() => {
     fixture = TestBed.configureTestingModule({
@@ -32,7 +31,7 @@ describe(`Word-Cloud Chart Component`, () => {
   })
 
   it(`should format the data point tooltip`, () => {
-    const series = comp.options.series[0] as Highcharts.WordCloudChartSeriesOptions
+    const series = comp.options.series[0]
     const point = {
       name: 'word',
       weight: 321,

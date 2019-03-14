@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { Chart, Options } from 'highcharts'
 
 // demo chart copied from https://www.highcharts.com/demo/area-missing
 @Component({
@@ -10,7 +11,7 @@ import { Component } from '@angular/core'
   `
 })
 export class AreaChartComponent {
-  public options: Highcharts.Options = {
+  public options: Options = {
     chart: {
       type: 'area',
       spacingBottom: 30
@@ -43,7 +44,7 @@ export class AreaChartComponent {
       },
       labels: {
         formatter: function () {
-          return this.value
+          return this.value.toString()
         }
       }
     },
@@ -64,15 +65,18 @@ export class AreaChartComponent {
     series: []
   }
 
-  public chart: Highcharts.ChartObject
 
-  public onLoad(evt: {chart: Highcharts.ChartObject, highcharts: Highcharts.Static}) {
+  public chart: Chart
+
+  public onLoad(evt) {
     this.chart = evt.chart
     this.chart.addSeries({
+      type: 'area',
       name: 'John',
       data: [0, 1, 4, 4, 5, 2, 3, 7]
     })
     this.chart.addSeries({
+      type: 'area',
       name: 'Jane',
       data: [1, 0, 3, null, 3, 1, 2, 1]
     })

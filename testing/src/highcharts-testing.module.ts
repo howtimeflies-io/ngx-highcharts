@@ -13,7 +13,7 @@ export class HighchartsTestingModule {
 }
 
 export function mockHighchartsService(): any {
-  const highcharts = window['Highcharts'] || require('highcharts/highcharts.src')
+  const highcharts = window['Highcharts'] || require('highcharts')
   window['Highcharts'] = highcharts
   return {
     load: () => Promise.resolve(highcharts),

@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, EventEmitter, Inject, Input, OnDes
 import { safeChainedProperty, waitUntilObjectAvailable } from '../helper/helper'
 import { HighchartsConfig } from './highcharts.config'
 import { HighchartsService } from './highcharts.service'
+import * as Highcharts from 'highcharts'
 
 interface Size {
   width: number,
@@ -19,12 +20,11 @@ export class HighchartComponent implements AfterViewInit, OnDestroy {
 
   @Input() public options: Highcharts.Options = {}
 
-  @Output() public load: EventEmitter<{chart: Highcharts.ChartObject, highcharts: Highcharts.Static}> =
-    new EventEmitter<{chart: Highcharts.ChartObject, highcharts: Highcharts.Static}>()
+  @Output() public load = new EventEmitter<{chart: Highcharts.Chart; highcharts: typeof Highcharts}>()
 
   private _modules: string[] = []
 
-  private chart: Highcharts.ChartObject
+  private chart: Highcharts.Chart
 
   constructor(private highchartsService: HighchartsService,
               private config: HighchartsConfig,
@@ -41,7 +41,7 @@ export class HighchartComponent implements AfterViewInit, OnDestroy {
   public ngAfterViewInit() {
     const req = this._modules.length > 0 ? this.highchartsService.loadModules(this._modules)
                                          : this.highchartsService.load()
-    req.then((highcharts: Highcharts.Static) => {
+    req.then(highcharts => {
       highcharts.setOptions(this.config.globalOptions)
       highcharts.chart(this.element.nativeElement, this.options, it => {
         this.chart = it
@@ -81,7 +81,7 @@ export class HighchartComponent implements AfterViewInit, OnDestroy {
     const height = size.height -
       (parseInt(style['paddingTop'], 10) || 0) -
       (parseInt(style['paddingBottom'], 10) || 0)
-    this.chart.setSize(width, height, false)
+    this.chart.setSize(width, height)
   }
 
   private getElementSize(el: HTMLElement): Size {

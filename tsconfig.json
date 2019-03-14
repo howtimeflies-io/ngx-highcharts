@@ -12,8 +12,7 @@
       "node_modules/@types"
     ],
     "types": [
-      "jest",
-      "highcharts"
+      "jest"
     ],
     "lib": [
       "es2017",

@@ -2,15 +2,14 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing'
 import {HighchartsTestingModule} from '@howtimeflies/ngx-highcharts/testing'
 
 import {DrilldownChartComponent} from './drilldown-chart.component'
+import * as Highcharts from 'highcharts'
 
 describe(`Drill-down Chart Component`, () => {
   let comp: DrilldownChartComponent
   let fixture: ComponentFixture<DrilldownChartComponent>
 
   // add the required module
-  const highcharts = require('highcharts/highcharts.src')
-  require('highcharts/modules/drilldown.src')(highcharts)
-  window['Highcharts'] = highcharts
+  require('highcharts/modules/drilldown.src')(Highcharts)
 
   beforeEach(async(() => {
     fixture = TestBed.configureTestingModule({
@@ -23,7 +22,7 @@ describe(`Drill-down Chart Component`, () => {
   }))
 
   it(`should display the data on chart`, () => {
-    const data = comp.chart.series[0].data.map((it: Highcharts.DataPoint) => [it.name, it.y])
+    const data = comp.chart.series[0].data.map(it => [it.name, it.y])
 
     expect(data).toContainEqual(['IE', 56.33])
     expect(data).toContainEqual(['Chrome', 24.03])
@@ -37,7 +36,7 @@ describe(`Drill-down Chart Component`, () => {
     let data = null
     spyOn(comp.chart, 'addSeriesAsDrilldown').and.callFake((x, drillDownData) => data = drillDownData)
     const point = comp.chart.series[0].data[0]
-    highcharts.fireEvent(comp.chart, 'drilldown', {point})
+    Highcharts.fireEvent(comp.chart, 'drilldown', {point})
 
     expect(data.name).toEqual('IE')
     expect(data.data).toContainEqual(['v11.0', 24.13])
@@ -50,7 +49,7 @@ describe(`Drill-down Chart Component`, () => {
 
   it(`should not drill down with invalid data`, () => {
     spyOn(comp.chart, 'addSeriesAsDrilldown')
-    highcharts.fireEvent(comp.chart, 'drilldown', {point: {name: 'invalid'}})
+    Highcharts.fireEvent(comp.chart, 'drilldown', {point: {name: 'invalid'}})
     expect(comp.chart.addSeriesAsDrilldown).not.toHaveBeenCalled()
   })
 })

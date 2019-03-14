@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core'
+import * as Highcharts from 'highcharts'
+// @ts-ignore
+import { factory } from 'highcharts/modules/drilldown'
 
 // demo chart copied from https://www.highcharts.com/demo/pie-drilldown
 @Component({
@@ -29,23 +32,22 @@ export class DrilldownChartComponent implements OnInit {
         }
       }
     },
-
     tooltip: {
       headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
       pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
     },
     series: [{
+      type: 'pie',
       name: 'Brands',
-      colorByPoint: true,
       data: []
-    } as Highcharts.PieChartSeriesOptions],
+    }],
     drilldown: {
       series: []
     }
   }
-  public chart: Highcharts.ChartObject
-  private data: Array<{name: string, y: number, drilldown?: string}> = []
-  private drillDownData: Array<{name: string, data: any[]}> = []
+  public chart: Highcharts.Chart
+  private data: {name: string; y: number; drilldown?: string}[] = []
+  private drillDownData: Highcharts.SeriesPieOptions[] = []
 
   public ngOnInit(): void {
     this.data = [{
@@ -74,6 +76,7 @@ export class DrilldownChartComponent implements OnInit {
     }]
 
     this.drillDownData = [{
+      type: 'pie',
       name: 'IE',
       data: [
         ['v11.0', 24.13],
@@ -84,6 +87,7 @@ export class DrilldownChartComponent implements OnInit {
         ['v7.0', 0.5]
       ]
     }, {
+      type: 'pie',
       name: 'Chrome',
       data: [
         ['v40.0', 5],
@@ -102,6 +106,7 @@ export class DrilldownChartComponent implements OnInit {
         ['v30.0', 0.14]
       ]
     }, {
+      type: 'pie',
       name: 'Firefox',
       data: [
         ['v35', 2.76],
@@ -114,6 +119,7 @@ export class DrilldownChartComponent implements OnInit {
         ['v32', 0.15]
       ]
     }, {
+      type: 'pie',
       name: 'Safari',
       data: [
         ['v8.0', 2.56],
@@ -125,6 +131,7 @@ export class DrilldownChartComponent implements OnInit {
         ['v6.2', 0.17]
       ]
     }, {
+      type: 'pie',
       name: 'Opera',
       data: [
         ['v12.x', 0.34],
@@ -136,11 +143,11 @@ export class DrilldownChartComponent implements OnInit {
 
   }
 
-  public onLoad(evt: {chart: Highcharts.ChartObject, highcharts: Highcharts.Static}) {
+  public onLoad(evt: {chart: Highcharts.Chart, highcharts: typeof Highcharts}) {
     this.chart = evt.chart
 
-    evt.chart.series[0].setData(this.data)
-    evt.highcharts.addEvent(evt.chart, 'drilldown', it => this.onDrillDown(it))
+    this.chart.series[0].setData(this.data)
+    evt.highcharts.addEvent(this.chart, 'drilldown', it => this.onDrillDown(it))
   }
 
   private onDrillDown(evt) {

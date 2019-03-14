@@ -3,6 +3,7 @@ import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core
 import { HighchartComponent } from './highchart.component'
 import { HighchartsConfig } from './highcharts.config'
 import { HighchartsService } from './highcharts.service'
+import * as Highcharts from 'highcharts'
 
 @Component({
   template: `
@@ -16,10 +17,10 @@ import { HighchartsService } from './highcharts.service'
 })
 class ConsumerComponent {
   public options: Highcharts.Options = {}
-  public chart: Highcharts.ChartObject
+  public chart: Highcharts.Chart
   public modules: string[]
 
-  public chart2: Highcharts.ChartObject
+  public chart2: Highcharts.Chart
   public visible = false
 }
 
@@ -27,37 +28,30 @@ describe(`Highchart-Component Consumer`, () => {
   let comp: ConsumerComponent
   let fixture: ComponentFixture<ConsumerComponent>
   let service
-  let theChart
   let width = 0
   let height = 0
-
-  const highcharts = require('highcharts')
 
   beforeEach(async(() => {
     service = {
       load: () => null,
       loadModules: () => null
     }
-    spyOn(service, 'load').and.returnValue(Promise.resolve(highcharts))
-    spyOn(service, 'loadModules').and.returnValue(Promise.resolve(highcharts))
+    spyOn(service, 'load').and.returnValue(Promise.resolve(Highcharts))
+    spyOn(service, 'loadModules').and.returnValue(Promise.resolve(Highcharts))
 
     width = 0
     height = 0
-    highcharts.wrap(highcharts, 'chart', (proceed, el, opts, callback) =>  {
-      proceed(el, opts, chart => {
-        if (theChart !== chart) { // avoid "Error: <spyOn> : setSize has already been spied upon"
-          theChart = chart
-          spyOn(chart, 'setSize').and.callFake((w, h) => {
-            width = w
-            height = h
-          })
-        }
-        callback(chart)
+    spyOn(Highcharts, 'chart').and.callFake((renderTo, opts, callback) => {
+      const chart = new Highcharts.Chart(renderTo, opts, callback)
+      spyOn(chart, 'setSize').and.callFake((w, h) => {
+        width = w
+        height = h
       })
+      return chart
     })
 
     fixture = TestBed.configureTestingModule({
-      declarations: [HighchartComponent, ConsumerComponent ],
+      declarations: [ HighchartComponent, ConsumerComponent ],
       providers: [
         { provide: HighchartsConfig, useValue: HighchartsConfig.defaultConfig },
         { provide: HighchartsService, useValue: service },
@@ -66,6 +60,7 @@ describe(`Highchart-Component Consumer`, () => {
 
     fixture.detectChanges()
     comp = fixture.componentInstance
+
   }))
 
   it(`should fill the container on init`, () => {

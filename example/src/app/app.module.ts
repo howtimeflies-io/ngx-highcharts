@@ -11,6 +11,11 @@ import { WordcloudChartComponent } from './charts/wordcloud-chart.component'
 import { RouterModule } from '@angular/router'
 import { ROUTES } from './app.routes'
 
+const config: HighchartsConfig = {
+  delayToExecuteModulesCode: 2000,
+  maxDelayToResizeContainer: 10000,
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +31,7 @@ import { ROUTES } from './app.routes'
     RouterModule.forRoot(ROUTES, { useHash: Boolean(history.pushState) === false }),
   ],
   providers: [
-    { provide: HighchartsConfig, useValue: {} }
+    { provide: HighchartsConfig, useValue: config }
   ],
   bootstrap: [AppComponent]
 })
