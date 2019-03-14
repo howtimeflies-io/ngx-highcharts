@@ -11,7 +11,7 @@
 A Highcharts wrapper for Angular (version 4 and newer)
 
 * lazily-load the Highcharts library (60+ KB gzipped) and any additional modules from CDN or your own distribution
-* strong typed (thanks to [@types/highcharts](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/highcharts))
+* take advantage of the Highcharts official typings
 * automatically resize the charts to fulfill its container
 * easy installation, configuration, usage and testing, with [examples](https://github.com/howtimeflies-io/ngx-highcharts/tree/master/example)
 
@@ -19,12 +19,12 @@ A Highcharts wrapper for Angular (version 4 and newer)
 
 ```bash
 yarn add @howtimeflies/ngx-highcharts
-yarn add @types/highcharts --dev
+yarn add highcharts --dev
 ```
 or
 ```bash
 npm install --save @howtimeflies/ngx-highcharts
-npm install --save-dev @types/highcharts
+npm install --save-dev highcharts
 ```
 
 ## Configuration
@@ -96,19 +96,21 @@ Add a `<ngx-highchart>` element to the HTML template. **It must be wrapped in a 
 Set the chart options in the typescript code, and get the chart object in the `load` event handler.
 
 ```typescript
+import { Chart, Options } from 'highcharts'
 export class ChartComponent {
-  public options: Highcharts.Options = {
+  public options: Options = {
     chart: { type: 'area' },
     series:[
       {
         name: 'name',
+        type: 'area',
         data: []
       }
     ],
     ...
   }
 
-  public chart: Highcharts.ChartObject
+  public chart: Chart
 }
 ```
 
@@ -118,6 +120,7 @@ Update the chart data dynamically.
 this.chart.series[0].setData([1, 0, 3, null, 3, 1, 2, 1])
 
 this.chart.addSeries({
+  type: 'area',
   name: 'John',
   data: [0, 1, 4, 4, 5, 2, 3, 7]
 })
@@ -135,7 +138,7 @@ If some additional highcharts modules are required, set them in the `modules` at
 Set event handlers to the chart
 
 ```typescript
-public onLoad(evt: {chart: Highcharts.ChartObject, highcharts: Highcharts.Static}) {
+public onLoad(evt: {chart: Chart; highcharts: typeof Highcharts}) {
   this.chart = evt.chart
 
   evt.chart.series[0].setData(this.data)
@@ -154,14 +157,13 @@ Install the Highcharts library as a dev dependency: `yarn add highcharts --dev` 
 
 Verify the chart data and event handler
 ```typescript
+import * as Highcharts from 'highcharts'
 describe(`Drill-down Chart Component`, () => {
   let comp: DrilldownChartComponent
   let fixture: ComponentFixture<DrilldownChartComponent>
 
-  // add the required modules if needed
-  const highcharts = require('highcharts/highcharts.src')
-  require('highcharts/modules/drilldown.src')(highcharts)
-  window['Highcharts'] = highcharts
+  // add the required module
+  require('highcharts/modules/drilldown.src')(Highcharts)
   
   beforeEach(async(() => {
     fixture = TestBed.configureTestingModule({
@@ -189,7 +191,7 @@ describe(`Drill-down Chart Component`, () => {
     spyOn(comp.chart, 'addSeriesAsDrilldown').and.callFake((x, drillDownData) => data = drillDownData)
     const point = comp.chart.series[0].data[0]
     // simulate an event on the chart object
-    highcharts.fireEvent(comp.chart, 'drilldown', {point})
+    Highcharts.fireEvent(comp.chart, 'drilldown', {point})
 
     // verify the data
     expect(data.name).toEqual('IE')
@@ -197,3 +199,12 @@ describe(`Drill-down Chart Component`, () => {
   })
 })
 ```
+
+
+## Deployment
+
+With Angular CLI's default `ng build`, the "highcharts" library is bundled into the production build since it is imported in the project for its typings. [angular-cli issue](https://github.com/angular/angular-cli/issues/10089)
+
+To work it around, please extend `ng build` with `@angular-builders/custom-webpack:browser`, and then mark 'highcharts' as external in the extra webpack config.
+
+Please check [the example project](https://github.com/howtimeflies-io/ngx-highcharts/tree/master/example) for details.
