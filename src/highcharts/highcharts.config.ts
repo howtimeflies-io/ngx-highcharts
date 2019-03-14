@@ -1,3 +1,5 @@
+import { Options } from 'highcharts'
+
 export class HighchartsConfig {
   public static defaultConfig: HighchartsConfig = {
     cdnBaseUrl: 'https://unpkg.com/highcharts',
@@ -11,5 +13,5 @@ export class HighchartsConfig {
   public scriptName?: string
   public delayToExecuteModulesCode?: number
   public maxDelayToResizeContainer?: number
-  public globalOptions?: Highcharts.GlobalOptions
+  public globalOptions?: Options
 }

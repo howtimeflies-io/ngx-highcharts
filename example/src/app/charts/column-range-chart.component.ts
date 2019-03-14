@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { Chart, Options } from 'highcharts'
 
 // demo chart copied from https://www.highcharts.com/demo/area-missing
 @Component({
@@ -11,9 +12,9 @@ import { Component } from '@angular/core'
 })
 export class ColumnRangeChartComponent {
 
-  public chart: Highcharts.ChartObject
+  public chart: Chart
 
-  public options: Highcharts.Options = {
+  public options: Options = {
     chart: {
       type: 'columnrange',
       inverted: true
@@ -56,6 +57,7 @@ export class ColumnRangeChartComponent {
     },
 
     series: [{
+      type: 'columnrange',
       name: 'Temperatures',
       data: [
         [-9.7, 9.4],

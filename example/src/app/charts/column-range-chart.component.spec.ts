@@ -3,14 +3,19 @@ import {HighchartsTestingModule} from '@howtimeflies/ngx-highcharts/testing'
 
 import {ColumnRangeChartComponent} from './column-range-chart.component'
 
+import * as Highcharts from 'highcharts'
+
+interface ColumnRangePoint extends Highcharts.Point {
+  low: number;
+  high: number;
+}
+
 describe(`Column Range Chart Component`, () => {
   let comp: ColumnRangeChartComponent
   let fixture: ComponentFixture<ColumnRangeChartComponent>
 
   // add the required module
-  const highcharts = require('highcharts/highcharts.src')
-  require('highcharts/highcharts-more.src')(highcharts)
-  window['Highcharts'] = highcharts
+  require('highcharts/highcharts-more')(Highcharts)
 
   beforeEach(async(() => {
     fixture = TestBed.configureTestingModule({
@@ -23,7 +28,7 @@ describe(`Column Range Chart Component`, () => {
   }))
 
   it(`should display the data on chart`, () => {
-    const data = comp.chart.series[0].data.map((it: Highcharts.DataPoint) => [it.x, it.low, it.high])
+    const data = comp.chart.series[0].data.map((it: ColumnRangePoint) => [it.x, it.low, it.high])
 
     expect(data).toContainEqual([0,   -9.7,  9.4])
     expect(data).toContainEqual([1,   -8.7,  6.5])

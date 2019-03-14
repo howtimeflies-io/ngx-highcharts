@@ -3,11 +3,10 @@
   "rootDir": "../",
   "globals": {
     "ts-jest": {
-      "tsConfigFile": "config/tsconfig.spec.json"
-    },
-    "__TRANSFORM_HTML__": true
+      "tsConfig": "config/tsconfig.spec.json"
+    }
   },
-  "setupTestFrameworkScriptFile": "<rootDir>/config/jest.ts",
+  "setupFilesAfterEnv": ["<rootDir>/config/jest.ts"],
   "testPathIgnorePatterns": [
     "/node_modules/",
     "/example/"

@@ -1,4 +1,5 @@
 import {Component} from '@angular/core'
+import { Chart, Options } from 'highcharts'
 
 interface Word {name: string, weight: number}
 
@@ -13,9 +14,9 @@ interface Word {name: string, weight: number}
   `
 })
 export class WordcloudChartComponent {
-  public chart: Highcharts.ChartObject
+  public chart: Chart
 
-  public options: Highcharts.Options = {
+  public options: Options = {
     series: [{
       type: 'wordcloud',
       data: [],
@@ -28,15 +29,15 @@ export class WordcloudChartComponent {
           return `<strong>${this.name}</strong>: Occurrence ${this.weight}`
         }
       }
-    } as Highcharts.WordCloudChartSeriesOptions], // tslint:disable-line: no-object-literal-type-assertion
+    }],
     title: {
       text: 'Wordcloud of Lorem Ipsum'
     }
   }
 
-  public onLoad(evt: {chart: Highcharts.ChartObject, highcharts: Highcharts.Static}) {
+  public onLoad(evt) {
     this.chart = evt.chart
-    evt.chart.series[0].setData(this.getWords())
+    this.chart.series[0].setData(this.getWords())
   }
 
   private getWords(): Word[] {

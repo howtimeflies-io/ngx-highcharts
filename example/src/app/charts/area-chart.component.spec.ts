@@ -28,12 +28,16 @@ describe(`Area Chart Component`, () => {
   })
 
   it(`should format the data point tooltip`, () => {
-    const point = {
-      series: {name: 'series-name'},
+    const point = comp.chart.series[0].data[0]
+    const pt = {
+      ...point,
+      ...comp.options.tooltip,
       x: 1,
       y: 123,
-      ...comp.options.tooltip
+      key: 0,
+      color: '#000',
+      point,
     }
-    expect(point.formatter()).toEqual('<b>series-name</b><br/>1: 123')
+    expect(pt.formatter()).toEqual('<b>John</b><br/>1: 123')
   })
 })
